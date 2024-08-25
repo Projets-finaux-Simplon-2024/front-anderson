@@ -98,7 +98,7 @@ export const deleteDocument = async (documentId: number): Promise<void> => {
   };
 
   
-// src/services/apiService.ts
+// gestion de l'upload des documents
 export const uploadDocument = async (
     file: File,
     collectionId: number,
@@ -117,5 +117,33 @@ export const uploadDocument = async (
       },
     });
   };
-  
-  
+
+
+// gestion de la creation de collection
+export const createCollection = async (
+  name: string,
+  description: string
+): Promise<void> => {
+  await axiosInstance.post('/create_collection', {
+    name,
+    description,
+  });
+};
+
+
+export const deleteCollection = async (collectionId: number): Promise<void> => {
+  await axiosInstance.delete(`/collections/${collectionId}`);
+};
+
+
+// Gestion de la modification de collection
+export const patchCollection = async (
+  collectionId: number,
+  name: string,
+  description: string
+): Promise<void> => {
+  await axiosInstance.patch(`/collections/${collectionId}`, {
+    name,
+    description,
+  });
+};
