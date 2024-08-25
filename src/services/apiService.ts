@@ -147,3 +147,22 @@ export const patchCollection = async (
     description,
   });
 };
+
+
+export const createUser = async (
+  username: string,
+  email: string,
+  password: string,
+  roleId: number
+): Promise<void> => {
+  await axiosInstance.post('/create_user', { 
+    username,
+    email,
+    password,
+    role_id: roleId,
+  });
+};
+
+export const deleteUser = async (userId: number): Promise<void> => {
+  await axiosInstance.delete(`/users/${userId}`);
+};

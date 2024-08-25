@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchUsers, fetchCollections, fetchRoles, deleteCollection, User, Collection, Role } from '../services/apiService';
+import { fetchUsers, fetchCollections, fetchRoles, deleteCollection, fetchDocuments, User, Collection, Role, Document } from '../services/apiService';
 import { FaInfoCircle } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
-import PatchCollectionButton from './PatchCollectionButton'; // Importez le nouveau composant
-import { RootState } from '../app/store'; // Importez le type pour accéder à l'état de Redux
+import PatchCollectionButton from './PatchCollectionButton'; 
+import { RootState } from '../app/store'; 
 
 const CollectionTable: React.FC = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [documents, setDocuments] = useState<Document[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [collectionToDelete, setCollectionToDelete] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const auth = useSelector((state: RootState) => state.auth); // Sélectionner l'état auth de Redux
+  const auth = useSelector((state: RootState) => state.auth); 
 
   const loadCollections = async () => {
     try {
@@ -21,6 +23,15 @@ const CollectionTable: React.FC = () => {
       setCollections(collectionsData);
     } catch (error) {
       console.error('Erreur lors du chargement des collections :', error);
+    }
+  };
+
+  const loadDocuments = async () => {
+    try {
+      const documentsData = await fetchDocuments();
+      setDocuments(documentsData);
+    } catch (error) {
+      console.error('Erreur lors du chargement des documents :', error);
     }
   };
 
@@ -37,6 +48,7 @@ const CollectionTable: React.FC = () => {
 
   useEffect(() => {
     loadCollections();
+    loadDocuments();
     loadUsersAndRoles();
 
     const handleCollectionsUpdated = () => {
@@ -64,14 +76,20 @@ const CollectionTable: React.FC = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  const handleDelete = async (collectionId: number) => {
+  const handleDelete = async () => {
+    const hasDocuments = documents.some(doc => doc.collection_id === collectionToDelete);
+
+    if (hasDocuments) {
+      setErrorMessage('Impossible de supprimer la collection. Des documents sont encore présents.');
+      return;
+    }
+
     try {
-      await deleteCollection(collectionId); // Utilisation du bon endpoint pour supprimer la collection
-      setCollections(collections.filter((col) => col.collection_id !== collectionId));
+      await deleteCollection(collectionToDelete!); 
+      setCollections(collections.filter((col) => col.collection_id !== collectionToDelete));
       setShowModal(false);
       setCollectionToDelete(null);
 
-      // Émettre l'événement pour mettre à jour les collections
       const event = new CustomEvent('collectionsUpdated');
       window.dispatchEvent(event);
     } catch (error) {
@@ -80,6 +98,7 @@ const CollectionTable: React.FC = () => {
   };
 
   const openModal = (collectionId: number) => {
+    setErrorMessage(null); // Réinitialiser le message d'erreur
     setCollectionToDelete(collectionId);
     setShowModal(true);
   };
@@ -87,6 +106,7 @@ const CollectionTable: React.FC = () => {
   const closeModal = () => {
     setShowModal(false);
     setCollectionToDelete(null);
+    setErrorMessage(null); // Réinitialiser le message d'erreur lors de la fermeture de la modale
   };
 
   return (
@@ -138,13 +158,13 @@ const CollectionTable: React.FC = () => {
               <td>
                 <PatchCollectionButton 
                   collection={collection} 
-                  disabled={!auth.role?.author_patch_collection} // Désactiver le bouton si l'utilisateur n'a pas les droits
+                  disabled={!auth.role?.author_patch_collection} 
                 />
               </td>
               <td>
                 <button 
                   onClick={() => openModal(collection.collection_id)} 
-                  disabled={!auth.role?.author_delete_collection} // Désactiver le bouton si l'utilisateur n'a pas les droits
+                  disabled={!auth.role?.author_delete_collection} 
                 >
                   Supprimer
                 </button>
@@ -157,8 +177,9 @@ const CollectionTable: React.FC = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
             <p>Êtes-vous sûr de vouloir supprimer cette collection ?</p>
-            <button onClick={() => handleDelete(collectionToDelete!)}>Oui</button>
+            <button onClick={handleDelete}>Oui</button>
             <button onClick={closeModal}>Non</button>
           </div>
         </div>
