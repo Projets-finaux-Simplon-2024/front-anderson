@@ -75,7 +75,11 @@ const UploadDocumentButton: React.FC = () => {
       window.dispatchEvent(event);
     } catch (error: any) {
       console.error('Erreur lors du téléchargement du document :', error);
-      setError('Une erreur inattendue est survenue lors du téléchargement du document.');
+      if (error.response && error.response.data && error.response.data.detail) {
+        setError(error.response.data.detail);
+      } else {
+        setError('Une erreur inattendue est survenue lors du téléchargement du document.');
+      }
     } finally {
       setUploading(false);
     }
