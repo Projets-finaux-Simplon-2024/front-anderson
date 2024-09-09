@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { fetchCollections, Collection, uploadDocument } from '../services/apiService';
 import './UploadDocumentButton.css';
 
-const ALLOWED_EXTENSIONS = ['pdf', 'txt', 'html', 'docx'];
-
 const UploadDocumentButton: React.FC = () => {
   const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -11,7 +9,6 @@ const UploadDocumentButton: React.FC = () => {
   const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
   const [title, setTitle] = useState<string>('');
   const [uploading, setUploading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadCollections = async () => {
@@ -23,7 +20,6 @@ const UploadDocumentButton: React.FC = () => {
         }
       } catch (error) {
         console.error('Erreur lors du chargement des collections :', error);
-        setError('Erreur lors du chargement des collections.');
       }
     };
 
@@ -39,43 +35,25 @@ const UploadDocumentButton: React.FC = () => {
     setSelectedFile(null);
     setSelectedCollection(collections.length > 0 ? collections[0] : null);
     setTitle('');
-    setError(null);
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
-    if (file) {
-      const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      if (fileExtension && ALLOWED_EXTENSIONS.includes(fileExtension)) {
-        setSelectedFile(file);
-        setError(null); // Clear any previous error
-      } else {
-        setSelectedFile(null);
-        setError(`Format de fichier non pris en charge. Formats autorisés : ${ALLOWED_EXTENSIONS.join(', ')}.`);
-      }
-    } else {
-      setSelectedFile(null);
-    }
+    setSelectedFile(event.target.files?.[0] || null);
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !selectedCollection || title.trim() === '') {
-      setError('Veuillez remplir tous les champs obligatoires.');
-      return;
-    }
+    if (!selectedFile || !selectedCollection || title === '') return;
 
     setUploading(true);
-    setError(null);
-
     try {
       await uploadDocument(selectedFile, selectedCollection.collection_id, selectedCollection.name, title);
       closeUploadModal();
 
+      // Émettre un événement personnalisé pour informer de la mise à jour
       const event = new CustomEvent('documentsUpdated');
       window.dispatchEvent(event);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Erreur lors du téléchargement du document :', error);
-      setError('Une erreur inattendue est survenue lors du téléchargement du document.');
     } finally {
       setUploading(false);
     }
@@ -91,13 +69,7 @@ const UploadDocumentButton: React.FC = () => {
         <div className="modal">
           <div className="modal-content">
             <h2>Ajouter un document</h2>
-
-            {error && (
-              <div className="error-message">
-                {error}
-              </div>
-            )}
-
+            
             <label>Collection :</label>
             <select
               value={selectedCollection?.collection_id || ''}
@@ -122,7 +94,7 @@ const UploadDocumentButton: React.FC = () => {
             />
 
             <label>Fichier :</label>
-            <input type="file" onChange={handleFileSelect} accept={ALLOWED_EXTENSIONS.map(ext => `.${ext}`).join(', ')} />
+            <input type="file" onChange={handleFileSelect} />
 
             <div className="modal-buttons">
               <button onClick={closeUploadModal}>Annuler</button>
