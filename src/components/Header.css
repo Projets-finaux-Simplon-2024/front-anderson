@@ -1,0 +1,46 @@
+/* Conteneur principal du header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1a1a1a; /* Couleur de fond */
+    color: #ffffff;
+    height: 10dvh;
+  }
+  
+  /* Section de gauche : Bonjour et icônes */
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-left span {
+    font-family: 'Exo', sans-serif;
+    font-size: 1.2rem;
+    margin-right: 20px;
+  }
+  
+  .header-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #3fe079; /* Vert Matrix pour les icônes */
+  }
+  
+  /* Section de droite : Titre et image */
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-right h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    margin-right: 10px;
+  }
+  
+  .header-logo {
+    width: 50px;
+    height: 50px;
+  }
+  

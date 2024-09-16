@@ -1,23 +1,59 @@
+/* Conteneur principal des onglets */
+.tabs-container {
+  width: 95%; /* Largeur ajustée à 95% de la fenêtre */
+  height: 73dvh; /* Hauteur dynamique basée sur la fenêtre */
+  margin: 0 auto; /* Centre horizontalement */
+  padding: 20px; /* Espace interne */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* S'assure que le contenu s'étale uniformément */
+  overflow-y: auto; /* Ajoute un défilement vertical si nécessaire */
+}
+
+/* Conteneur des headers des onglets */
 .tab-headers {
-    display: flex;
-    margin-bottom: 10px;
-  }
-  
-  .tab-header {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #f1f1f1;
-    border: none;
-    border-bottom: 2px solid transparent;
-  }
-  
-  .tab-header.active {
-    background-color: #e6983b;
-    border-bottom: 2px solid #ebab3a;
-  }
-  
-  .tab-content {
-    padding: 10px;
-    border: 1px solid #ebab3a;
-  }
-  
+  display: flex;
+  margin-bottom: 10px;
+  background-color: #ffffff; /* Fond blanc pour les onglets */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Légère ombre */
+  padding: 10px; /* Ajoute un léger padding autour des onglets */
+}
+
+/* Style des onglets inactifs */
+.tab-header {
+  flex: 1;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #ffffff; /* Fond blanc pour tous les onglets */
+  color: #1a1a1a; /* Couleur de texte foncé */
+  font-weight: bold; /* Texte en gras pour améliorer la lisibilité */
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center; /* Centre le texte des onglets */
+}
+
+/* Style de l'onglet actif */
+.tab-header.active {
+  background-color: #3fe079; /* Vert Matrix pour l'onglet actif */
+  color: #ffffff; /* Texte en blanc pour l'onglet actif */
+  border-bottom: 2px solid #34d76a; /* Légère bordure pour l'onglet actif */
+  border-radius: 8px 8px 0 0; /* Coins arrondis pour l'onglet actif */
+}
+
+/* Effet hover pour tous les onglets */
+.tab-header:hover {
+  background-color: #d3d3d3; /* Gris clair au survol */
+  color: #1a1a1a;
+}
+
+/* Contenu des onglets */
+.tab-content {
+  flex: 1; /* Prend l'espace restant pour bien remplir la hauteur */
+  padding: 20px;
+  background-color: #ffffff; /* Fond blanc pour le contenu */
+  border: 1px solid #34d76a; /* Bordure verte Matrix */
+  border-radius: 0 0 8px 8px; /* Arrondir les coins en bas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Légère ombre */
+  overflow-y: auto; /* Ajouter un défilement si le contenu dépasse la hauteur */
+}

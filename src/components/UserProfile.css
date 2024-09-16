@@ -1,0 +1,37 @@
+/* Conteneur principal */
+.user-profile-container {
+    padding: 20px;
+    font-family: 'Exo', sans-serif;
+    display: flex;
+    justify-content: space-between; /* Aligne le texte à gauche et les icônes à droite */
+    align-items: center; /* Assure l'alignement vertical */
+  }
+  
+  /* Conteneur du texte Bonjour, username */
+  .username-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Conteneur des icônes */
+  .icons-container {
+    display: flex;
+    align-items: center; /* Assure que les icônes sont alignées avec le texte */
+  }
+  
+  /* Icônes */
+  .icon-wrapper {
+    margin-left: 10px; /* Ajuste l'espace entre le nom et les icônes */
+  }
+  
+  .icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Liste des droits de l'utilisateur */
+  .role-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  

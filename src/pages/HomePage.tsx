@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLogin } from '../features/auth/hooks';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './HomePage.css'; // Assurez-vous de créer ce fichier CSS
 
 const HomePage: React.FC = () => {
   const login = useLogin();
@@ -23,44 +24,41 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div>
-      <img src="/images/icons8-néo-144.png" alt="Néo" />
-      <h1>Anderson</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Nom d'utilisateur :</label>
+    <div className="login-container">
+      <img src="/images/icons8-néo-144.png" alt="Néo" className="neo-image" />
+      <h1 className="login-title">Anderson</h1>
+      <form onSubmit={handleLogin} className="login-form">
+        <div className="form-group">
+          <label htmlFor="username" className="login-label">Nom d'utilisateur :</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="login-input"
           />
         </div>
-        <div>
-          <label htmlFor="password">Mot de passe :</label>
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        <div className="form-group">
+          <label htmlFor="password" className="login-label">Mot de passe :</label>
+          <div className="password-container">
             <input
               type={showPassword ? "text" : "password"}
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ flex: 1, paddingRight: '30px' }} // Ajout d'un padding pour l'espace de l'icône
+              className="login-input"
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              style={{
-                position: 'absolute',
-                right: '10px', // Ajustement pour rapprocher l'icône du champ
-                cursor: 'pointer',
-              }}
+              className="password-toggle"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">Connexion</button>
       </form>
 
       {error && (

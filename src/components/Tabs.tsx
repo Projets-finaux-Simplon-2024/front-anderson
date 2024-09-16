@@ -14,7 +14,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
-    <div>
+    <div className="tabs-container">
       <div className="tab-headers">
         {tabs.map((tab, index) => (
           <button

@@ -1,26 +1,68 @@
 /* src/components/UploadDocumentButton.css */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-  }
-  
-  .modal-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px; /* Ajout d'une largeur fixe pour la modale */
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ajout d'une légère ombre */
+}
+
+/* Style des champs de texte et du select */
+.modal-content input[type="text"],
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style pour le bouton de téléchargement de fichier */
+.modal-content input[type="file"] {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+/* Style des boutons dans la modale */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  background-color: #3fe079;
+  color: #1a1a1a;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  background-color: #34d76a;
+}
+
+/* Style du bouton d'annulation */
+.modal-buttons button:first-child {
+  background-color: #b22234;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #8b1e2b;
+}
