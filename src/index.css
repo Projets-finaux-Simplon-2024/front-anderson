@@ -1,14 +1,136 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo:wght@400;700&display=swap');
+
+label, h2{
+  color: #1a1a1a;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: 'Exo', sans-serif;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+/* Style des tableaux */
+table.tftable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table.tftable th,
+table.tftable td {
+  border: 1px solid #3fe079;
+  padding: 10px;
+  text-align: left;
+}
+
+table.tftable th {
+  background-color: #b0b0b0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+table.tftable td {
+  background-color: #1a1a1a;
+  font-family: 'Exo', sans-serif;
+  color: #d3d3d3;
+}
+
+table.tftable tr:nth-child(even) {
+  background-color: #b0b0b0;
+}
+
+.icon {
+  margin-left: 5px;
+  cursor: pointer;
+  color: #3fe079;
+}
+
+/* Boutons */
+button {
+  font-family: 'Exo', sans-serif;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.modify-btn {
+  background-color: #1976d2;
+  color: white;
+}
+
+button.modify-btn:hover {
+  background-color: #1565c0;
+}
+
+button.delete-btn {
+  background-color: #b22234;
+  color: white;
+}
+
+button.delete-btn:hover {
+  background-color: #8b1e2b;
+}
+
+/* Bouton de déconnexion */
+.logout-btn {
+  background-color: #b22234;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #8b1e2b;
+}
+
+/* Modale */
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  background-color: rgba(0, 0, 0, 0.5); /* Ajoute un fond semi-transparent */
+  z-index: 1000; /* Assure que la modale soit au-dessus des autres éléments */
+}
+
+.modal-content {
+  background-color: #333;
+  padding: 20px;
+  border: 2px solid #3fe079;
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* Boutons dans la modale */
+.modal button {
+  margin: 10px;
+  background-color: #3fe079;
+  color: #1a1a1a;
+}
+
+.modal button:hover {
+  background-color: #34d76a;
 }
 

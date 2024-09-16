@@ -5,7 +5,11 @@ import { clearAuthData } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { persistor } from '../app/store';
 
-const LogoutButton: React.FC = () => {
+interface LogoutButtonProps {
+  className?: string; // Permet d'accepter une classe personnalisée
+}
+
+const LogoutButton: React.FC<LogoutButtonProps> = ({ className }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

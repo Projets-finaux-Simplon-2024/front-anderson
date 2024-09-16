@@ -1,0 +1,92 @@
+/* Conteneur de la modale */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  /* Style pour le contenu de la modale */
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #333;
+  }
+  
+  /* Style des labels */
+  .modal-content label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Style des champs de texte */
+  .modal-content input[type="text"],
+  .modal-content input[type="email"],
+  .modal-content input[type="password"],
+  .modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Style pour le conteneur du mot de passe */
+  .modal-content .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Style pour l'icône de visibilité du mot de passe */
+  .modal-content .password-container span {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  /* Style pour les messages d'erreur */
+  .modal-content p {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -10px;
+  }
+  
+  /* Boutons */
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-buttons button {
+    background-color: #3fe079;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: #34d76a;
+  }
+  
+  /* Bouton d'annulation */
+  .modal-buttons button:first-child {
+    background-color: #b22234;
+  }
+  
+  .modal-buttons button:first-child:hover {
+    background-color: #8b1e2b;
+  }
+  

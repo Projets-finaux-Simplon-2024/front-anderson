@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { fetchUsers, fetchCollections, fetchDocuments, fetchRoles, deleteDocument, User, Collection, Document, Role } from '../services/apiService';
 import { FaInfoCircle } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
-import './DocumentTable.css';
 
 const DocumentTable: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

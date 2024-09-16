@@ -1,6 +1,4 @@
 import React from 'react';
-import UserProfile from '../components/UserProfile';
-import LogoutButton from '../components/LogoutButton';
 import DocumentTable from '../components/DocumentTable';
 import UploadDocumentButton from '../components/UploadDocumentButton';
 import CollectionTable from '../components/CollectionTable';
@@ -8,11 +6,13 @@ import CreateCollectionButton from '../components/CreateCollectionButton';
 import UserTable from '../components/UserTable';
 import CreateUserButton from '../components/CreateUserButton';
 import Tabs from '../components/Tabs';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
 
 const DashboardPage: React.FC = () => {
-  const auth = useSelector((state: RootState) => state.auth); // Sélectionner l'état auth de Redux
+  const auth = useSelector((state: RootState) => state.auth);
 
   const tabs = [
     {
@@ -42,15 +42,13 @@ const DashboardPage: React.FC = () => {
         </>
       ),
     },
-  ].filter(Boolean); // Supprime les éléments undefined si l'utilisateur n'a pas accès
+  ].filter(Boolean);
 
   return (
-    <div>
-      <img src="/images/icons8-néo-144.png" alt="Néo" />
-      <h1>Tableau de bord</h1>
-      <UserProfile />
+    <div className="dashboard-container">
+      <Header />
       <Tabs tabs={tabs as any} />
-      <LogoutButton />
+      <Footer /> {/* Ajout du Footer */}
     </div>
   );
 };

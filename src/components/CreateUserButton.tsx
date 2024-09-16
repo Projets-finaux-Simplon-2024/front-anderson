@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchRoles, createUser, Role } from '../services/apiService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './CreateUserButton.css';
 
 const CreateUserButton: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -98,7 +99,6 @@ const CreateUserButton: React.FC = () => {
         <div className="modal">
           <div className="modal-content">
             <h2>Créer un utilisateur</h2>
-
             <label>Nom d'utilisateur :</label>
             <input
               type="text"
